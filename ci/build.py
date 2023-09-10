@@ -12,7 +12,7 @@ logger = logging.getLogger('builder')
 logger.setLevel("INFO")
 
 
-GRAALVM_HOME_PATH = "/Users/ev.mareycheva/opt/graalvm-jdk-17/Contents/Home"
+GRAALVM_HOME_PATH = "<path-to-graalvm>/graalvm-jdk-17/Contents/Home"
 GRAALVM_JAVA_PATH = f"{GRAALVM_HOME_PATH}/bin/java"
 NATIVE_IMAGE_RESOURCES_PATH = "./src/main/resources/META-INF/native-image"
 
