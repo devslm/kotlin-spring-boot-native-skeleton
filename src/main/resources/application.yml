@@ -1,0 +1,47 @@
+server:
+  port: 8055
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID
+
+spring:
+  application:
+    name: Native App
+  main:
+    banner-mode: "off"
+  mvc:
+    servlet:
+      path: /api/v1
+    throw-exception-if-no-handler-found: true
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  datasource:
+    url: jdbc:sqlite:${app.data.path.base}/native-app-db.db
+    driver-class-name: org.sqlite.JDBC
+    username: admin
+    password: admin
+    hikari:
+      maximumPoolSize: 1
+      connectionTimeout: 15000
+      idleTimeout: 600000
+      connectionTestQuery: SELECT 1
+  jpa:
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      dialect: org.sqlite.hibernate.dialect.SQLiteDialect
+      ddl-auto: none
+      format_sql: false
+
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    name: ${app.data.path.base}/logs/native-app-db.log
+
+app:
+  data:
+    path:
+      base: .

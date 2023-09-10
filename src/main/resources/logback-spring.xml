@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+    <springProperty scope="context" name="application_name" source="spring.application.name" />
+
+    <appender name="JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%i.gz</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>20</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.hibernate.SQL" level="WARN" />
+    <logger name="org.hibernate.type" level="WARN" />
+    <logger name="org.hibernate.SQL_SLOW" level="INFO"/>
+
+    <springProfile name="prod | rc">
+        <root level="INFO">
+            <appender-ref ref="JSON_FILE" />
+        </root>
+    </springProfile>
+
+    <springProfile name="dev | default">
+
+        <root level="INFO">
+            <appender-ref ref="JSON_FILE" />
+            <appender-ref ref="STDOUT" />
+        </root>
+    </springProfile>
+</configuration>
