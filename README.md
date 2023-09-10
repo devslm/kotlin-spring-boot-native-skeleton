@@ -1,2 +1,8 @@
-# kotlin-spring-boot-native-skeleton
-Create native kotlin spring boot skeleton application with Gradle and GraalVM for desktop and docker images
+# Spring Boot native compilation demonstration
+Create native Kotlin Spring Boot skeleton application with Gradle and GraalVM for desktop and docker images
+
+## Article links
+[English version](https://)
+
+[Russian version](https://)
+
