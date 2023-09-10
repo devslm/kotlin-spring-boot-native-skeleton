@@ -2,6 +2,7 @@ package com.app.service.test
 
 import com.app.entity.device.DeviceEntity
 import com.app.repository.device.DeviceRepository
+import com.app.service.device.DeviceService
 import com.app.service.websocket.AppStatusWebSocketService
 import io.github.oshai.KotlinLogging
 import jakarta.annotation.PostConstruct
@@ -16,6 +17,7 @@ import java.util.*
 
 @Service
 class TestService(
+    private val deviceService: DeviceService,
     private val deviceRepository: DeviceRepository,
     private val okHttpClient: OkHttpClient,
     @Value("\${server.port}")
@@ -54,6 +56,11 @@ class TestService(
             .execute()
 
         logger.info { "Devices: ${response.body?.string()}" }
+    }
+
+    @Scheduled(fixedDelay = 60_000L, initialDelay = 3_000L)
+    fun showFirstActiveDevicePeriodically() {
+        deviceService.getFirstActive { logger.info { "Found first active device id: ${it.id}" } }
     }
 
     @Scheduled(fixedDelay = 5_000L, initialDelay = 3_000L)

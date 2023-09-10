@@ -441,9 +441,11 @@
   "methods":[
     {"name":"<init>","parameterTypes":["com.app.repository.device.DeviceRepository","okhttp3.OkHttpClient","int"] }, 
     {"name":"<init>","parameterTypes":["com.app.repository.device.DeviceRepository","okhttp3.OkHttpClient","int","java.lang.String"] }, 
+    {"name":"<init>","parameterTypes":["com.app.service.device.DeviceService","com.app.repository.device.DeviceRepository","okhttp3.OkHttpClient","int","java.lang.String"] }, 
     {"name":"addTestData","parameterTypes":[] }, 
     {"name":"reConnectToWebsocket","parameterTypes":[] }, 
-    {"name":"showDevicesPeriodically","parameterTypes":[] }
+    {"name":"showDevicesPeriodically","parameterTypes":[] }, 
+    {"name":"showFirstActiveDevicePeriodically","parameterTypes":[] }
   ]
 },
 {
@@ -1561,6 +1563,10 @@
   "name":"java.util.concurrent.Executor",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true
+},
+{
+  "name":"java.util.concurrent.ScheduledThreadPoolExecutor",
+  "methods":[{"name":"setRemoveOnCancelPolicy","parameterTypes":["boolean"] }]
 },
 {
   "name":"java.util.concurrent.ThreadFactory",
